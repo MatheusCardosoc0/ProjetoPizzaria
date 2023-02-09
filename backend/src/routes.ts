@@ -6,6 +6,9 @@ import { AllCategoryController } from "./controllers/category/allCategoryControl
 import { CreateCategoryController } from "./controllers/category/createCategoryController";
 import { AddItemInOrderController } from "./controllers/order/addItemInOrderController";
 import { CreateOrderController } from "./controllers/order/createOrderController";
+import { DetailOrderController } from "./controllers/order/detailOrderController";
+import { FinishOrdercontroller } from "./controllers/order/finishOrderCOntroller";
+import { GetOrderController } from "./controllers/order/getOrderController";
 import { RemoveItemInOrderController } from "./controllers/order/removeItemInOrderController";
 import { RemoveOrderController } from "./controllers/order/removeOrderController";
 import { SendOrderController } from "./controllers/order/sendOrderController";
@@ -56,5 +59,11 @@ router.post('/order/item', isAuthAuthenticated, new AddItemInOrderController().h
 router.delete('/order/item', isAuthAuthenticated, new RemoveItemInOrderController().handle)
 
 router.put('/order/send', isAuthAuthenticated, new SendOrderController().handle)
+
+router.get('/order/list', isAuthAuthenticated, new GetOrderController().handle)
+
+router.get('/order/detail', isAuthAuthenticated, new DetailOrderController().handle)
+
+router.put('/order/finish', isAuthAuthenticated, new FinishOrdercontroller().handle)
 
 export {router}
