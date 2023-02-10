@@ -1,20 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-
-interface AuthContextData{
-  user: UserProps
-  isAuthenticated: boolean
-}
-
-type UserProps = {
-  id: string
-  name: string
-  email: string
-}
-
-type SignInProps = {
-  email: string
-  password: string
-}
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { destroyCookie, setCookie } from "nookies";
+import { AuthContextData, SignInProps, UserProps } from "../@types/interfaces";
+import Router from "next/router";
 
 const initialState = {
   user: {
@@ -29,13 +16,34 @@ const AuthContext = createSlice({
   name: 'dataUser',
   initialState,
   reducers: {
-    signIn(){
-      alert('clicou')
+    signIn(state, {payload}: PayloadAction<any>){
+      console.log(payload.token)
+
+      const {email, id, name}: UserProps = payload
+
+      setCookie(undefined,'@nextauth.token', payload.token, {
+        maxAge: 60 * 60 * 24 * 30, // expira em 1 mes
+        path: '/'
+      })
+
+      state.user = {
+        email,
+        id,
+        name
+      }
+    },
+    signOut(){
+      try {
+        destroyCookie(undefined, '@nextauth.token')
+        Router.push('/')
+      } catch (error) {
+        console.log('erro ao deslogar')
+      }
     }
   }
 })
 
-export const { signIn } = AuthContext.actions
+export const { signIn, signOut } = AuthContext.actions
 export {AuthContext}
 
 export const DataAuthContext = (state: any) => {

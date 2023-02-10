@@ -7,7 +7,7 @@ import {
   Container, Form, Input,
 } from '../components/sharedstyles'
 import { useDispatch, useSelector } from 'react-redux'
-import { DataAuthContext, signIn } from '../context/AuthContext'
+import { DataAuthContext } from '../context/AuthContext'
 
 const cadastro = () => {
 
@@ -17,7 +17,6 @@ const cadastro = () => {
   function handleSubmit(event: FormEvent<HTMLFormElement>){
     event.preventDefault()
     
-    dispatch(signIn())
   }
 
 

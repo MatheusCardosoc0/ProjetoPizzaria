@@ -18,6 +18,7 @@ const Input = styled.input<{width?: number; padding?: number}>`
   background-color: #080606;
   border: 2px solid gray;
   padding-inline: 8px;
+  color: white;
 
   ::placeholder{
     color: #575555;
