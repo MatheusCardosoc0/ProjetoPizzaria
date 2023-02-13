@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { CardLogo } from '../components/Logo'
@@ -8,32 +8,68 @@ import {
 } from '../components/sharedstyles'
 import { useDispatch, useSelector } from 'react-redux'
 import { DataAuthContext } from '../context/AuthContext'
+import { RegisterProps } from '../@types/interfaces'
+import { RegisterUser } from '../context/fetchUserDataFunctions/RegisterUser'
+import { canSSRGuest } from '../utils/canSSRGuest'
 
 const cadastro = () => {
 
-  const user = useSelector(DataAuthContext)
+
+  const [registerData, setRegisterData] = useState({
+    email: '',
+    name: '',
+    password: ''
+  } as RegisterProps)
   const dispatch = useDispatch()
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>){
+  const HandleRegisterData = (event: ChangeEvent<HTMLInputElement>, name: 'name' | 'password' | 'email') => {
+    setRegisterData({
+      ...registerData,
+      [name]: event.target.value
+    })
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    
+
+    const { email, name, password } = registerData
+
+    let data = {
+      email,
+      name,
+      password
+    } as RegisterProps
+
+    dispatch(RegisterUser(data))
   }
 
 
   return (
     <Container>
       <Head>
-        <title>Peperoni - cadastro</title>
+        <title>Pepperoni - cadastro</title>
       </Head>
-      {user.user.name}
       <Form onSubmit={handleSubmit}>
         <CardLogo />
-        <Input width={300} padding={16}
-          placeholder="Seu nome" />
-        <Input width={300} padding={16}
-          placeholder="Seu email" />
-        <Input width={300} padding={16}
-          placeholder="Sua senha" />
+
+        <Input
+          placeholder="Seu nome"
+          onChange={e => HandleRegisterData(e, 'name')}
+          value={registerData.name}
+          required />
+
+        <Input
+          placeholder="Seu email"
+          onChange={e => HandleRegisterData(e, 'email')}
+          value={registerData.email}
+          required />
+
+        <Input
+          placeholder="Sua senha"
+          onChange={e => HandleRegisterData(e, 'password')}
+          value={registerData.password}
+          required />
+
         <Button type='submit'>
           Cadastrar
         </Button>
@@ -44,3 +80,11 @@ const cadastro = () => {
 }
 
 export default cadastro
+
+
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {}
+  }
+})

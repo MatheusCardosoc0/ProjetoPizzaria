@@ -10,10 +10,10 @@ const Container = styled.div`
   min-height: 100vh;
 `
 
-const Input = styled.input<{width?: number; padding?: number}>`
-  width: ${props => props.width + 'px' || '100px'};
-  padding: ${({padding}) => padding + 'px' || '4px'};
-  border-radius: ${({width}) => width / 32 + 'px' };
+const Input = styled.input<{width?: number, padding?:number}>`
+  width: ${({width = 300}) => `${width}px`};
+  padding: ${({padding = 16}) => `${padding}px`};
+  border-radius: ${({width = 300}) => `${width / 32}px`};
   font-size: 1rem;
   background-color: #080606;
   border: 2px solid gray;
@@ -32,16 +32,16 @@ const Form = styled.form<{}>`
   align-items: center;
 `
 
-const Button = styled.button`
-  font-size: 2rem;
+const Button = styled.button<{width?: number; fontSizeInRem?: number; color?: string}>`
+  font-size: ${({fontSizeInRem = 2}) => `${fontSizeInRem}rem`};
   padding-block: 12px;
   padding-inline: 24px;
   border-radius: 8px;
-  background-color: ${({theme}) => theme.colors.terceary};
+  background-color: ${({color, theme}) => color || theme.colors.terceary};
   color: white;
   border: none;
   cursor: pointer;
-  width: 300px;
+  width: ${({width = 300}) => `${width}px` };
   font-weight: bold;
 `
 

@@ -21,11 +21,6 @@ const AuthContext = createSlice({
 
       const {email, id, name}: UserProps = payload
 
-      setCookie(undefined,'@nextauth.token', payload.token, {
-        maxAge: 60 * 60 * 24 * 30, // expira em 1 mes
-        path: '/'
-      })
-
       state.user = {
         email,
         id,

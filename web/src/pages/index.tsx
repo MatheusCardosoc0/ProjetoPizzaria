@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { ChangeEvent, FormEvent, useState } from 'react'
@@ -8,8 +9,9 @@ import {
   Button,
   Container, Form, Input,
 } from '../components/sharedstyles'
-import { DataAuthContext, signIn} from '../context/AuthContext'
-import { LoginUser } from '../context/LoginUser'
+import { DataAuthContext, signIn } from '../context/AuthContext'
+import { LoginUser } from '../context/fetchUserDataFunctions/LoginUser'
+import { canSSRGuest } from '../utils/canSSRGuest'
 
 export default function Home() {
 
@@ -32,7 +34,7 @@ export default function Home() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const {email, password} = loginData
+    const { email, password } = loginData
 
     let data: SignInProps = {
       email,
@@ -45,19 +47,19 @@ export default function Home() {
   return (
     <Container>
       <Head>
-        <title>Peperoni - login</title>
+        <title>Pepperoni - login</title>
       </Head>
       <Form onSubmit={handleSubmit}>
         <CardLogo />
 
-        <Input width={300} padding={16}
+        <Input
           placeholder="Seu email"
           type={"email"}
           onChange={e => handleLoginData(e, 'email')}
           value={loginData.email}
           required />
 
-        <Input width={300} padding={16}
+        <Input
           placeholder="Sua senha"
           type={"password"}
           onChange={e => handleLoginData(e, 'password')}
@@ -72,3 +74,9 @@ export default function Home() {
     </Container>
   )
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {}
+  }
+})

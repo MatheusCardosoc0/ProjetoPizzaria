@@ -14,4 +14,8 @@ type SignInProps = {
   password: string
 }
 
+export interface RegisterProps extends SignInProps{
+  name: string
+}
+
 export type {AuthContextData, SignInProps, UserProps}
