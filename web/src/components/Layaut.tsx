@@ -21,6 +21,7 @@ const NavbarContainer = styled.nav`
       cursor: pointer;
       :hover{
         text-decoration: underline;
+        color: ${({theme}) => theme.colors.terceary};
       }
     }
 
@@ -56,7 +57,7 @@ export const Layaut = ({ children }: { children: ReactNode }) => {
 
         <div>
           <Link href={'/category'}>Categoria</Link>
-          <Link href={'/cardapio'}>Cardapio</Link>
+          <Link href={'/product'}>Cardapio</Link>
           <button>
             <FiLogOut />
           </button>

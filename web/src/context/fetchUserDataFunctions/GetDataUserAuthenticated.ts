@@ -5,7 +5,7 @@ import { UserProps } from "../../@types/interfaces";
 import { api } from "../../services/apiClient";
 import { signIn, signOut } from "../AuthContext";
 
-export const GetDataUserAuthenticated = (): ThunkAction<void, RootState, unknown, Action<string>> => async (dispatch) => {
+export const GetDataUserAuthenticated = (): any => async (dispatch) => {
 
   const {'@nextauth.token': token} = parseCookies()
 

@@ -5,5 +5,6 @@ export const theme: DefaultTheme = {
     primary: '#2C2C2C',
     secondary: '#FFAB00',
     terceary: '#E11D1D',
+    black: '#080606',
   }
 } 

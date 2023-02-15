@@ -8,7 +8,7 @@ import Router from 'next/router';
 import { toast } from 'react-toastify';
 import { setCookie } from 'nookies';
 
-export const RegisterUser = (data : RegisterProps): ThunkAction<void, RootState, unknown, Action<string>>  => async (dispatch) => {
+export const RegisterUser = (data : RegisterProps): any  => async (dispatch) => {
   try {
 
     const {email, password, name} = data

@@ -5,7 +5,7 @@ import { CardLogo } from '../components/Logo'
 import {
   Button,
   Container, Form, Input,
-} from '../components/sharedstyles'
+} from '../components/FormElements'
 import { useDispatch, useSelector } from 'react-redux'
 import { DataAuthContext } from '../context/AuthContext'
 import { RegisterProps } from '../@types/interfaces'

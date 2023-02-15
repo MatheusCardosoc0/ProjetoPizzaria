@@ -8,7 +8,7 @@ import { CardLogo } from '../components/Logo'
 import {
   Button,
   Container, Form, Input,
-} from '../components/sharedstyles'
+} from '../components/FormElements'
 import { DataAuthContext, signIn } from '../context/AuthContext'
 import { LoginUser } from '../context/fetchUserDataFunctions/LoginUser'
 import { canSSRGuest } from '../utils/canSSRGuest'
