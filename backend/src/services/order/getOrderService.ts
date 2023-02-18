@@ -5,7 +5,7 @@ class GetOrderService{
 
     const getOrder = await prisma.order.findMany({
       where: {
-        draft: false,
+        draft: true,
         status: false
       },
       orderBy: {

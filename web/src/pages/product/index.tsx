@@ -137,6 +137,7 @@ const index = ({ categoryList }: productProps) => {
             placeholder={"Preço do produto"}
             onChange={e => handleFormData(e, 'price')}
             value={formData.price}
+            min={4}
             required />
 
           <Textarea width={500} heigth={140}

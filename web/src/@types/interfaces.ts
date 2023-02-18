@@ -18,4 +18,24 @@ export interface RegisterProps extends SignInProps{
   name: string
 }
 
-export type {AuthContextData, SignInProps, UserProps}
+type Order = {
+  name: string | null
+  table: number | string
+  id: string
+  draft: boolean
+  status: boolean
+}
+
+type Product = {
+  name: string
+  price: number | string
+  description: string
+}
+
+export interface Item{
+  Order: Order
+  Products: Product
+  amount: number
+}
+
+export type {AuthContextData, SignInProps, UserProps, Order, Product}
